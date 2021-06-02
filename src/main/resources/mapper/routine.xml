@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.unlike.tabatime.dao.RoutineDao">
+
+    <resultMap type="Routine" id="Routine">
+        <id property="id" column="id" javaType="Integer"></id><!--루틴 식별자-->
+        <result property="exerciseTime" column="exercise_time" javaType="Integer"></result><!--운동시간-->
+        <result property="restTime" column="rest_time" javaType="Integer"></result><!--휴식시간-->
+        <result property="setCnt" column="set_cnt" javaType="Integer"></result><!--세트수-->
+        <result property="roundCnt" column="round_cnt" javaType="Integer"></result><!--라운드수-->
+        <result property="roundTime" column="round_time" javaType="Integer"></result><!--라운드시간-->
+        <result property="totalTime" column="total_time" javaType="Integer"></result><!--총 운동시간-->
+        <result property="regDate" column="reg_date" javaType="Date"></result><!--등록일시-->
+    </resultMap>
+
+    <select id="findByUser" resultMap="Routine">
+        SELECT
+            id,
+            exercise_time,
+            rest_time,
+            set_cnt,
+            round_cnt,
+            round_time,
+            total_time,
+            reg_date
+        FROM tbl_routine
+        WHERE 1=1 AND user_id = #{userId}
+    </select>
+
+    <select id="findTotalCountByUser" resultType="Integer">
+        SELECT
+            COUNT(*)
+        FROM tbl_routine
+        WHERE user_id = #{userId}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO tbl_routine (exercise_time, rest_time, set_cnt, round_cnt, round_time, total_time, user_id, reg_date)
+        VALUES (#{exerciseTime}, #{restTime}, #{setCnt}, #{roundCnt}, #{roundTime}, #{totalTime}, #{userId}, now());
+    </insert>
+</mapper>

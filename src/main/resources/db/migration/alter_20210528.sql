@@ -1,0 +1,1 @@
+ALTER TABLE tbl_user ADD `total_exercise_time` INT NULL DEFAULT 0 COMMENT '총운동시간' AFTER `email`;

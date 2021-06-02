@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.unlike.tabatime.dao.UserDao">
+    <resultMap type="User" id="User">
+        <id property="id" column="id" javaType="Integer"></id><!--회원 식별자-->
+        <result property="snsType" column="sns_type" javaType="String"></result><!--sns 종류-->
+        <result property="email" column="email" javaType="String"></result><!--이메일-->
+        <result property="totalExerciseTime" column="total_exercise_time" javaType="Integer"></result><!--휴면일시-->
+        <result property="status" column="status" javaType="String"></result><!--회원 상태-->
+        <result property="pausedDate" column="paused_date" javaType="Date"></result><!--휴면일시-->
+        <result property="regDate" column="reg_date" javaType="Date"></result><!--등록일시-->
+    </resultMap>
+
+    <select id="findOne" resultMap="User">
+        SELECT
+            id,
+            sns_type,
+            email,
+            status,
+            total_exercise_time,
+            login_date,
+            paused_date,
+            reg_date
+        FROM tbl_user
+        WHERE 1=1
+          AND status = 'active'
+          AND id = #{id}
+    </select>
+
+    <select id="findOneByEmail" resultMap="User">
+        SELECT
+            id,
+            sns_type,
+            email,
+            status,
+            total_exercise_time,
+            login_date,
+            paused_date,
+            reg_date
+        FROM tbl_user
+        WHERE 1=1
+          AND status = 'active'
+          AND email = #{email}
+    </select>
+
+    <select id="currentRankingUser" resultType="Integer">
+        SELECT
+               COUNT(*) +1
+        FROM tbl_user
+        WHERE total_exercise_time > (SELECT total_exercise_time FROM tbl_user WHERE id = #{id});
+    </select>
+
+    <select id="findTotalCount" resultType="Integer">
+        SELECT
+            COUNT(*)
+        FROM tbl_user;
+    </select>
+
+    <insert id="insert">
+        INSERT INTO tbl_user (sns_type, sns_id, email, status, login_date, reg_date, mod_date)
+        VALUES (#{snsType}, #{snsId}, #{email}, #{status}, now(), now(), now());
+    </insert>
+
+    <update id="updateLastLogin">
+        UPDATE tbl_user SET login_date = now(), mod_date = now() WHERE email = #{email}
+    </update>
+
+    <update id="leftUser">
+        UPDATE tbl_user SET status = 'left', left_date = now(), mod_date = now() WHERE id = #{id}
+    </update>
+
+    <update id="updateExerciseTime">
+        UPDATE tbl_user SET total_exercise_time = #{totalExerciseTime}, mod_date = now() WHERE id = #{id}
+    </update>
+</mapper>
