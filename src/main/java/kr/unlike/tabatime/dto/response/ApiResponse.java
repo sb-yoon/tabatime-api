@@ -1,31 +1,16 @@
 package kr.unlike.tabatime.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @RequiredArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResponse<T> {
-
-    // api 성공 여부
-    private boolean success;
-
-    // api 응답 메세지
-    private String msg;
-
-    // api 응답 코드
-    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-    private int code;
-
-    // api 통신시간
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date transactionTime;
+    private Integer code;
+    private String message;
 
     // DATA
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -33,37 +18,24 @@ public class ApiResponse<T> {
 
     public static ApiResponse<?> ok() {
         ApiResponse<?> response = new ApiResponse<>();
-        response.setSuccess(true);
-        response.setMsg("OK");
-        response.setTransactionTime(new Date());
-        response.setCode(200);
+        response.setCode(Result.A0200.getCode());
+        response.setMessage(Result.A0200.getMessage());
         return response;
     }
 
     public static <T> ApiResponse<T> ok(T data) {
         ApiResponse<T> response = new ApiResponse<>();
-        response.setSuccess(true);
-        response.setMsg("OK");
-        response.setTransactionTime(new Date());
-        response.setCode(200);
+        response.setCode(Result.A0200.getCode());
+        response.setMessage(Result.A0200.getMessage());
         response.setData(data);
         return response;
     }
 
-    public static ApiResponse<?> error(String message) {
+    public static ApiResponse<?> error(Result result, String message) {
         ApiResponse<?> response = new ApiResponse<>();
-        response.setSuccess(false);
-        response.setMsg(message);
-        response.setTransactionTime(new Date());
-        return response;
-    }
-
-    public static ApiResponse<?> error(String message, int code) {
-        ApiResponse<?> response = new ApiResponse<>();
-        response.setSuccess(false);
-        response.setMsg(message);
-        response.setCode(code);
-        response.setTransactionTime(new Date());
+        response.setCode(result.getCode());
+        if (message == null) response.setMessage(result.getMessage());
+        else response.setMessage(message);
         return response;
     }
 }

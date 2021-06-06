@@ -1,21 +1,23 @@
 package kr.unlike.tabatime.exception;
 
+import kr.unlike.tabatime.dto.response.Result;
+
 public class BizException extends RuntimeException {
 
     private static final long serialVersionUID = 2447329833156858838L;
 
-    private Integer code;
+    private Result result;
 
-    public BizException(String msg, Integer code) {
+    public BizException(String msg, Result result) {
         super(msg);
-        this.code = code;
+        this.result = result;
     }
 
     public BizException(String msg) {
         super(msg);
     }
 
-    public Integer getCode() {
-        return code;
+    public Result getCode() {
+        return result;
     }
 }

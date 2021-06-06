@@ -201,12 +201,6 @@ public class ValidateUtil {
         }
     }
 
-    public static void notNull(Object value, String msg, Integer code) {
-        if (value == null) {
-            throw new ValidateException(msg, code);
-        }
-    }
-
     public static void notNull(Object value, String msg) {
         if (value == null) {
             throw new ValidateException(msg);
@@ -216,12 +210,6 @@ public class ValidateUtil {
     public static void notEmpty(Collection<?> value, String msg) {
         if (value == null || value.size() == 0) {
             throw new ValidateException(msg);
-        }
-    }
-
-    public static void notEmpty(Collection<?> value, String msg, Integer code) {
-        if (value == null || value.size() == 0) {
-            throw new ValidateException(msg, code);
         }
     }
 
@@ -243,20 +231,14 @@ public class ValidateUtil {
         }
     }
 
-    public static void isTrue(boolean value, String msg, Integer code) {
-        if (!value) {
-            throw new ValidateException(msg, code);
-        }
-    }
-
     public static void isNotTrue(boolean value, String msg) {
         if (value) {
             throw new ValidateException(msg);
         }
     }
 
-    public static void error(String msg, Integer code) {
-        throw new ValidateException(msg, code);
+    public static void error(String msg) {
+        throw new ValidateException(msg);
     }
 
     public static void notEmpty(String src, String msg) {

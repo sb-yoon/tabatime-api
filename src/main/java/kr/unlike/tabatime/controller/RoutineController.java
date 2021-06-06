@@ -18,13 +18,13 @@ public class RoutineController {
 
     private final RoutineService routineService;
 
-    @PostMapping("")
+    @PostMapping
     public ApiResponse<?> saveRoutine(@RequestAttribute User user, @RequestBody RoutineRequest routineRequest) {
         routineService.saveRoutine(user, routineRequest);
         return ApiResponse.ok();
     }
 
-    @GetMapping("")
+    @GetMapping
     public ApiResponse<List<RoutineResponse>> routineList(@RequestAttribute User user) {
         return ApiResponse.ok(routineService.getRoutineList(user));
     }

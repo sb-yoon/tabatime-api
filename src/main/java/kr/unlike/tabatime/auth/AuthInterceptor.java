@@ -2,7 +2,6 @@ package kr.unlike.tabatime.auth;
 
 import kr.unlike.tabatime.domain.User;
 import kr.unlike.tabatime.exception.InvalidTokenException;
-import kr.unlike.tabatime.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -39,12 +38,12 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
 
             User user = tokenProvider.getAuthentication(token);
-            if (user == null) throw new NotFoundException("유효하지 않는 토큰입니다.", 401);
+            if (user == null) throw new InvalidTokenException("유효하지 않는 토큰입니다.");
             request.setAttribute("user", user);
 
             return true;
         } else {
-            throw new InvalidTokenException("유효하지 않는 토큰입니다.", 401);
+            throw new InvalidTokenException("유효하지 않는 토큰입니다.");
         }
     }
 }

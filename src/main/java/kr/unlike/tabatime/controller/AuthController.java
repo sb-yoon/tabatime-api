@@ -4,6 +4,7 @@ import kr.unlike.tabatime.dto.TokenResponse;
 import kr.unlike.tabatime.dto.UserRequest;
 import kr.unlike.tabatime.dto.response.ApiResponse;
 import kr.unlike.tabatime.domain.User;
+import kr.unlike.tabatime.dto.response.Result;
 import kr.unlike.tabatime.exception.BizException;
 import kr.unlike.tabatime.service.AuthService;
 import kr.unlike.tabatime.util.ValidateUtil;
@@ -19,10 +20,11 @@ public class AuthController {
     @PostMapping("/signup")
     public ApiResponse<?> signup(@RequestBody UserRequest userRequest) {
         ValidateUtil.notEmpty(userRequest.getEmail(), "이메일을 확인해주세요.");
+        ValidateUtil.notEmpty(userRequest.getSnsId(), "snsId를 확인해주세요.");
 
         User user = authService.findOneByEmail(userRequest.getEmail());
         if (user != null) {
-            throw new BizException("이미 가입되어 있는 유저입니다.", 991);
+            throw new BizException("이미 가입되어 있는 유저입니다.", Result.A1101);
         }
 
         User newUser = User.builder()

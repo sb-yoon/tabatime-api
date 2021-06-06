@@ -5,7 +5,8 @@ import kr.unlike.tabatime.dao.UserDao;
 import kr.unlike.tabatime.domain.User;
 import kr.unlike.tabatime.dto.TokenResponse;
 import kr.unlike.tabatime.dto.UserRequest;
-import kr.unlike.tabatime.exception.NotFoundException;
+import kr.unlike.tabatime.dto.response.Result;
+import kr.unlike.tabatime.exception.BizException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class AuthService {
 
         User user = userDao.findOneByEmail(userRequest.getEmail());
         if (user == null) {
-            throw new NotFoundException("가입되지 않는 회원입니다.", 990);
+            throw new BizException("가입되지 않는 회원입니다.", Result.A1000);
         }
 
         // 로그인 날짜
