@@ -15,7 +15,7 @@ echo "> 프로젝트 Build 시작"
 
 echo "> Build 파일 복사"
 
-cp ./target/*.jar $REPOSITORY/lib/
+cp ./target/*.jar $REPOSITORY/
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
@@ -33,8 +33,8 @@ fi
 
 echo "> 새 어플리케이션 배포"
 
-JAR_NAME=$(ls -tr $REPOSITORY/lib | grep $SERVICE_NAME | tail -n 1)
+JAR_NAME=$(ls -tr $REPOSITORY | grep $SERVICE_NAME | tail -n 1)
 
 echo "> JAR Name: $JAR_NAME"
 
-nohup java -jar $REPOSITORY/lib/$JAR_NAME &
+nohup java -jar $REPOSITORY/$JAR_NAME &

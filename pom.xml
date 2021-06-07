@@ -10,7 +10,7 @@
     </parent>
     <groupId>kr.unlike</groupId>
     <artifactId>tabatime</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>tabatime</name>
     <description>tabatime app service server</description>
     <properties>

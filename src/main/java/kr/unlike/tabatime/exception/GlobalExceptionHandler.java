@@ -84,7 +84,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public ApiResponse<?> handler(HttpMediaTypeNotSupportedException e, HttpServletRequest request) {
         log.error(e.getMessage());
-        return ApiResponse.error(Result.A0400, e.getMessage());
+        return ApiResponse.error(Result.A0406, e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
