@@ -2,7 +2,6 @@ package kr.unlike.tabatime.exception;
 import kr.unlike.tabatime.dto.response.ApiResponse;
 import kr.unlike.tabatime.dto.response.Result;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -94,17 +94,17 @@ public class GlobalExceptionHandler {
         return ApiResponse.error(Result.A0500, e.getMessage());
     }
 
-    @ExceptionHandler(NotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiResponse<?> handler(NotFoundException e, HttpServletRequest request) {
-        log.error(e.getMessage());
-        return ApiResponse.error(Result.A0404, e.getMessage());
-    }
-
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiResponse<?> handler(HttpMessageNotReadableException e, HttpServletRequest request) {
         log.error(e.getMessage());
         return ApiResponse.error(Result.A0400, e.getMessage());
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiResponse<?> handler(NoHandlerFoundException e, HttpServletRequest request) {
+        log.error(e.getMessage());
+        return ApiResponse.error(Result.A0404, e.getMessage());
     }
 }

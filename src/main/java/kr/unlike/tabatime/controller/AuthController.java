@@ -46,7 +46,7 @@ public class AuthController {
     }
 
     @PostMapping("/left")
-    public ApiResponse<?> left(@RequestAttribute User user) {
+    public ApiResponse<?> left(User user) {
         authService.left(user);
         return ApiResponse.ok();
     }

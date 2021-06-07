@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @GetMapping("/me")
-    public ApiResponse<UserResponse> getMe(@RequestAttribute User user) {
+    public ApiResponse<UserResponse> getMe(User user) {
         return ApiResponse.ok(new UserResponse().of(user));
     }
 }

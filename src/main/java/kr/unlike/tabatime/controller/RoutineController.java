@@ -19,18 +19,18 @@ public class RoutineController {
     private final RoutineService routineService;
 
     @PostMapping
-    public ApiResponse<?> saveRoutine(@RequestAttribute User user, @RequestBody RoutineRequest routineRequest) {
+    public ApiResponse<?> saveRoutine(User user, @RequestBody RoutineRequest routineRequest) {
         routineService.saveRoutine(user, routineRequest);
         return ApiResponse.ok();
     }
 
     @GetMapping
-    public ApiResponse<List<RoutineResponse>> routineList(@RequestAttribute User user) {
+    public ApiResponse<List<RoutineResponse>> routineList(User user) {
         return ApiResponse.ok(routineService.getRoutineList(user));
     }
 
     @GetMapping("/statistics")
-    public ApiResponse<StatisticsResponse> routineStatistics(@RequestAttribute User user) {
+    public ApiResponse<StatisticsResponse> routineStatistics(User user) {
         return ApiResponse.ok(routineService.getStatistics(user));
     }
 }
