@@ -74,10 +74,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public ApiResponse<?> handler(HttpRequestMethodNotSupportedException e, HttpServletRequest request) {
         log.error(e.getMessage());
-        return ApiResponse.error(Result.A0404, e.getMessage());
+        return ApiResponse.error(Result.A0405, e.getMessage());
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)

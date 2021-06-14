@@ -7,6 +7,7 @@ public enum Result {
     A0400(400,"Bad Request"),
     A0401(401,"Authentication failed"),
     A0404(404, "Not Found"),
+    A0405(405, "Method Not Allowed"),
     A0406(406, "HttpMediaTypeNotSupported"),
     A0500(500, "Internal Server Error"),
 
