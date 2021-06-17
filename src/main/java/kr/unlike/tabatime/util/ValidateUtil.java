@@ -9,13 +9,10 @@ import java.util.regex.Pattern;
 
 public class ValidateUtil {
 
-    private static int MAX_LOOP_CNT = 3;
+    private static final int MAX_LOOP_CNT = 3;
 
     public static boolean rangeLength(String value, int min, int max) {
-        if (value == null || value.trim().length() < min || value.trim().length() > max) {
-            return false;
-        }
-        return true;
+        return value != null && value.trim().length() >= min && value.trim().length() <= max;
     }
 
     public static boolean containsEng(String value) {
@@ -62,10 +59,7 @@ public class ValidateUtil {
         }
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(value);
-        if (!matcher.find()) {
-            return false;
-        }
-        return true;
+        return matcher.find();
     }
 
     /**

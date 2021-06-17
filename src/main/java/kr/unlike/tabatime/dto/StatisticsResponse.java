@@ -7,5 +7,6 @@ import lombok.Data;
 @Builder
 public class StatisticsResponse {
     private Integer totalRoutineCnt;
+    private Integer totalRoutineTime;
     private Double rankPer;
 }

@@ -49,6 +49,8 @@ public class RoutineService {
     @Transactional(readOnly = true)
     public StatisticsResponse getStatistics(User user) {
         int routineCnt = routineDao.findTotalCountByUser(user.getId());
+        int routineTime = routineDao.findTotalRoutineTimeByUser(user.getId());
+        log.info(routineTime + "");
 
         int userCnt = userDao.findTotalCount();
         int rank = userDao.currentRankingUser(user);
@@ -56,6 +58,7 @@ public class RoutineService {
 
         return StatisticsResponse.builder()
                 .totalRoutineCnt(routineCnt)
+                .totalRoutineTime(routineTime)
                 .rankPer(per)
                 .build();
     }

@@ -13,5 +13,7 @@ public interface RoutineDao extends BaseDao<Routine> {
 
     List<Routine> findByUser(Integer userId);
 
-    int findTotalCountByUser(Integer userId);
+    Integer findTotalCountByUser(Integer userId);
+
+    Integer findTotalRoutineTimeByUser(Integer userId);
 }

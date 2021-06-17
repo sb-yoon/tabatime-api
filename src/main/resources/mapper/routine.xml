@@ -34,6 +34,13 @@
         WHERE user_id = #{userId}
     </select>
 
+    <select id="findTotalRoutineTimeByUser" resultType="Integer">
+        SELECT
+            IFNULL(SUM(total_time), 0)
+        FROM tbl_routine
+        WHERE user_id = #{userId}
+    </select>
+
     <insert id="insert">
         INSERT INTO tbl_routine (exercise_time, rest_time, set_cnt, round_cnt, round_time, total_time, user_id, reg_date)
         VALUES (#{exerciseTime}, #{restTime}, #{setCnt}, #{roundCnt}, #{roundTime}, #{totalTime}, #{userId}, now());
