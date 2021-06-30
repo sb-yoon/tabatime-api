@@ -14,7 +14,7 @@ public interface UserDao extends BaseDao<User> {
 
     void updateLastLogin(String email);
 
-    void leftUser(Integer id);
+    void leftUser(Long id);
 
     void updateExerciseTime(User user);
 

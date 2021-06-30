@@ -11,9 +11,11 @@ import java.util.List;
 @Mapper
 public interface RoutineDao extends BaseDao<Routine> {
 
-    List<Routine> findByUser(Integer userId);
+    List<Routine> findByUser(Long userId);
 
-    Integer findTotalCountByUser(Integer userId);
+    Integer findTotalCountByUser(Long userId);
 
-    Integer findTotalRoutineTimeByUser(Integer userId);
+    Integer findTotalRoutineTimeByUser(Long userId);
+
+    void delete(Long userId, List<String> list);
 }

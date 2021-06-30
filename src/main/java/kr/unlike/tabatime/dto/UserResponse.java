@@ -1,5 +1,6 @@
 package kr.unlike.tabatime.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import kr.unlike.tabatime.domain.User;
 import kr.unlike.tabatime.dto.response.BaseResponse;
 import lombok.*;
@@ -13,9 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 public class UserResponse implements BaseResponse<UserResponse, User> {
 
-    private int id;
+    private Long id;
     private String snsType;
     private String email;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date regDate;
 
     @Override

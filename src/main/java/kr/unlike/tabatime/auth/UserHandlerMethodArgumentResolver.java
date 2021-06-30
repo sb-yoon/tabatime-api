@@ -1,6 +1,7 @@
 package kr.unlike.tabatime.auth;
 
 import kr.unlike.tabatime.domain.User;
+import kr.unlike.tabatime.exception.InvalidTokenException;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -20,6 +21,11 @@ public class UserHandlerMethodArgumentResolver implements HandlerMethodArgumentR
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
             NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
-        return request.getAttribute("user");
+        User user = (User) request.getAttribute("user");
+        if (user == null) {
+            throw new InvalidTokenException("유효하지 않는 토큰입니다.");
+        }
+
+        return user;
     }
 }

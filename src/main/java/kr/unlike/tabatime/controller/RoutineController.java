@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/routine")
@@ -32,5 +33,12 @@ public class RoutineController {
     @GetMapping("/statistics")
     public ApiResponse<StatisticsResponse> routineStatistics(User user) {
         return ApiResponse.ok(routineService.getStatistics(user));
+    }
+
+    @PostMapping("/delete")
+    public ApiResponse<?> deleteRoutine(@RequestBody Map<String, List<String>> map, User user) {
+        List<String> deleteRoutines = map.get("routineIds");
+        routineService.deleteRoutines(user, deleteRoutines);
+        return ApiResponse.ok();
     }
 }

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoutineResponse implements BaseResponse<RoutineResponse, Routine> {
-    private Integer id; // 루틴 식별자
+    private Long id; // 루틴 식별자
     private Integer exerciseTime; // 운동시간(초단위)
     private Integer restTime; // 휴식시간(초단위)
     private Integer setCnt; // 세트수

@@ -31,11 +31,22 @@ public class ApiResponse<T> {
         return response;
     }
 
+    public static ApiResponse<?> error(Result result) {
+        return error(result, result.getMessage());
+    }
+
     public static ApiResponse<?> error(Result result, String message) {
         ApiResponse<?> response = new ApiResponse<>();
         response.setCode(result.getCode());
         if (message == null) response.setMessage(result.getMessage());
         else response.setMessage(message);
+        return response;
+    }
+
+    public static ApiResponse<?> error(int code, String message) {
+        ApiResponse<?> response = new ApiResponse<>();
+        response.setCode(code);
+        response.setMessage(message);
         return response;
     }
 }

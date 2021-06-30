@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.unlike.tabatime.dao.UserDao">
     <resultMap type="User" id="User">
-        <id property="id" column="id" javaType="Integer"></id><!--회원 식별자-->
+        <id property="id" column="id" javaType="Long"></id><!--회원 식별자-->
         <result property="snsType" column="sns_type" javaType="String"></result><!--sns 종류-->
         <result property="email" column="email" javaType="String"></result><!--이메일-->
         <result property="totalExerciseTime" column="total_exercise_time" javaType="Integer"></result><!--휴면일시-->

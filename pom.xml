@@ -10,7 +10,7 @@
     </parent>
     <groupId>kr.unlike</groupId>
     <artifactId>tabatime</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <name>tabatime</name>
     <description>tabatime app service server</description>
     <properties>
@@ -36,6 +36,11 @@
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>

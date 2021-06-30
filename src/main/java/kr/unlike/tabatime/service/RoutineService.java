@@ -62,4 +62,9 @@ public class RoutineService {
                 .rankPer(per)
                 .build();
     }
+
+    @Transactional
+    public void deleteRoutines(User user, List<String> routineIds) {
+        routineDao.delete(user.getId(), routineIds);
+    }
 }

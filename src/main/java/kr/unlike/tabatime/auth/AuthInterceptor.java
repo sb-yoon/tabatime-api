@@ -23,27 +23,22 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        log.info("preHandle");
-
         String token = null;
         // 1. Request Header 에서 토큰을 가져옴.
         String bearer = request.getHeader(AUTHORIZATION_HEADER);
         if (StringUtils.hasText(bearer) && bearer.startsWith(BEARER_PREFIX)) {
             token = bearer.substring(7);
-    }
+        }
 
         log.info("token : {}", token);
 
+        User user = null;
         // 2. validateToken 으로 토큰 유효성 검사
         if (StringUtils.hasText(token) && tokenProvider.validateToken(token)) {
-
-            User user = tokenProvider.getAuthentication(token);
-            if (user == null) throw new InvalidTokenException("유효하지 않는 토큰입니다.");
-            request.setAttribute("user", user);
-
-            return true;
-        } else {
-            throw new InvalidTokenException("유효하지 않는 토큰입니다.");
+            user = tokenProvider.getAuthentication(token);
         }
+
+        request.setAttribute("user", user);
+        return true;
     }
 }
