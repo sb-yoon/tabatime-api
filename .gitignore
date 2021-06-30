@@ -35,3 +35,7 @@ build/
 logs/
 
 /src/main/resources/application-*.properties
+
+.DS_Store
+
+*.txt
