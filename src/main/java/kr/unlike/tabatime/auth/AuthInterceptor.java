@@ -1,9 +1,7 @@
 package kr.unlike.tabatime.auth;
 
 import kr.unlike.tabatime.domain.User;
-import kr.unlike.tabatime.exception.InvalidTokenException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -11,7 +9,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class AuthInterceptor implements HandlerInterceptor {
@@ -29,8 +26,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (StringUtils.hasText(bearer) && bearer.startsWith(BEARER_PREFIX)) {
             token = bearer.substring(7);
         }
-
-        log.info("token : {}", token);
 
         User user = null;
         // 2. validateToken 으로 토큰 유효성 검사
